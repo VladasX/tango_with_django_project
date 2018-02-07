@@ -20,6 +20,7 @@ class PageForm(forms.ModelForm):
     url = forms.URLField(max_length=200,
                          help_text="Please enter the URL of the page.")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -31,7 +32,8 @@ class PageForm(forms.ModelForm):
             url = 'http://' + url
             cleaned_data['url'] = url
             
-            return cleaned_data
+            return cleaned_data
+
 
     class Meta:
         # Provide an association between the ModelForm and a model
